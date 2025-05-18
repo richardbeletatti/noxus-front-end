@@ -1,15 +1,33 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './pages/login/Login';
-import Admin from './pages/admin/Admin';
+import AdminPage from './pages/admin/Admin';
 import Dashboard from './pages/dashboard/Dashboard';
+import Unauthorized from './pages/unauthorized/Unauthorized';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/login" element={<Login />} />
         <Route path="/" element={<Login />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route 
+          path="/admin" 
+          element={
+            <PrivateRoute roleRequired="admin">
+              <AdminPage />
+            </PrivateRoute>
+          } 
+        />
+        <Route 
+          path="/dashboard" 
+          element={
+            <PrivateRoute roleRequired="user">
+              <Dashboard />
+            </PrivateRoute>
+          } 
+        />
+        <Route path="/unauthorized" element={<Unauthorized />} />
       </Routes>
     </BrowserRouter>
   );

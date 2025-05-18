@@ -2,11 +2,13 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* sobe o conteúdo */
+  justify-content: flex-start;
   align-items: center;
-  background-color: #f9f9f9;
-  color: #333;
+  /* Fundo preto semi-transparente */
+  background-color: #242424;
+  color: #fff; /* texto branco pra contrastar no fundo escuro */
 }
+
 
 .login-content {
   display: flex;
@@ -33,14 +35,14 @@
   height: 44px;
   padding: 0 12px;
   font-size: 14px;
-  border: 1px solid #ccc;
+  border: 1px solid #aaa; /* borda mais clara */
   border-radius: 8px;
-  background-color: #fff;
-  color: #333;
+  background-color: #222; /* fundo escuro para input */
+  color: #eee;
 }
 
 .login-form input::placeholder {
-  color: #999;
+  color: #bbb;
 }
 
 .login-form button {
@@ -58,8 +60,8 @@
 }
 
 .login-footer {
-  margin-top: auto;
+   margin-top: auto;
   padding: 20px;
   font-size: 14px;
-  color: #000000;
+  color: #ccc;
 }
