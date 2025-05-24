@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './UserPanel.css';
+import KanbanPage from '../../kanban/KanbanPage';
 
 const UserPanel = () => {
   const { userId } = useParams();
@@ -29,16 +30,36 @@ const UserPanel = () => {
       });
   }, [userId]);
 
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/login');
+  };
+
   if (loading) return <p>Carregando painel do usuário...</p>;
   if (!userData) return <p>Usuário não encontrado.</p>;
 
   return (
     <div className="user-panel-container">
-      <button onClick={() => navigate(-1)} className="button-edit">Voltar</button>
-      <h2>Painel de {userData.name}</h2>
-      {/* Aqui você pode colocar mais dados e componentes do painel */}
-      <p>Email: {userData.email}</p>
-      {/* Exemplo de conteúdo do painel */}
+      {/* Cabeçalho sofisticado */}
+      <div className="user-panel-header">
+        <button onClick={() => navigate(-1)} className="user-panel-back" title="Voltar">
+          ←
+        </button>
+
+        <div className="user-panel-title-container">
+          <h2>{userData.name}</h2>
+          <p>{userData.email}</p>
+        </div>
+
+        <button onClick={handleLogout} className="user-panel-logout">
+          Sair
+        </button>
+      </div>
+
+      {/* Kanban */}
+      <div className="kanban-container">
+        <KanbanPage userId={userId} />
+      </div>
     </div>
   );
 };

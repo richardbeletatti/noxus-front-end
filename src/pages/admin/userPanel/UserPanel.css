@@ -1,36 +1,111 @@
 .user-panel-container {
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 24px;
-  border-radius: 12px;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  height: 100vh;
+  width: 100%;
+  background-color: #1e1e2f;
+  color: #fff;
   font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
 }
 
-.user-panel-container h2 {
-  margin-bottom: 16px;
-  color: #333;
-  font-size: 1.8rem;
+.user-panel-header {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: linear-gradient(90deg, #111827, #1e1e2f);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
-.user-panel-container p {
-  margin: 8px 0;
-  font-size: 1rem;
-  color: #555;
-}
-
-.button-edit {
-  padding: 10px 16px;
-  background-color: #4a90e2;
-  color: white;
+.user-panel-back {
+  background: transparent;
   border: none;
-  border-radius: 8px;
+  color: #ccc;
+  font-size: 1.5rem;
   cursor: pointer;
-  margin-bottom: 20px;
-  transition: background-color 0.3s ease;
+  transition: color 0.3s;
 }
 
-.button-edit:hover {
-  background-color: #3730a3;
+.user-panel-back:hover {
+  color: #fff;
+}
+
+.user-panel-title-container {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.user-panel-title-container h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.user-panel-title-container p {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.user-panel-logout {
+  background-color: #b91c1c;
+  border: none;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
+}
+
+.user-panel-logout:hover {
+  background-color: #dc2626;
+}
+
+.kanban-container {
+  flex: 1 1 auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+  display: flex;
+  padding: 16px;
+  gap: 16px;
+}
+
+/* Colunas Kanban */
+.kanban-column {
+  background-color: #2c2f48;
+  border-radius: 8px;
+  min-width: 250px;
+  max-width: 250px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.kanban-column h3 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+  color: #fff;
+}
+
+.kanban-add-column {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ddd;
+  border: 2px dashed #555;
+  border-radius: 8px;
+  padding: 12px;
+  min-width: 250px;
+  max-width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.kanban-add-column:hover {
+  background-color: rgba(255, 255, 255, 0.2);
 }

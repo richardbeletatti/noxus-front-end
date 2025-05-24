@@ -4,7 +4,7 @@ import AdminPage from './pages/admin/Admin';
 import Dashboard from './pages/dashboard/Dashboard';
 import Unauthorized from './pages/unauthorized/Unauthorized';
 import PrivateRoute from './components/PrivateRoute';
-import UserList from './pages/admin/UserList';
+import UserList from './pages/admin/userList/UserList';
 import UserPanel from './pages/admin/userPanel/UserPanel';
 
 function App() {
