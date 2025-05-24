@@ -4,6 +4,8 @@ import AdminPage from './pages/admin/Admin';
 import Dashboard from './pages/dashboard/Dashboard';
 import Unauthorized from './pages/unauthorized/Unauthorized';
 import PrivateRoute from './components/PrivateRoute';
+import UserList from './pages/admin/UserList';
+import UserPanel from './pages/admin/userPanel/UserPanel';
 
 function App() {
   return (
@@ -20,6 +22,22 @@ function App() {
           } 
         />
         <Route 
+        path="/admin/users" 
+        element={
+          <PrivateRoute roleRequired="admin">
+            <UserList />
+          </PrivateRoute>
+        } 
+      />
+      <Route 
+          path="/admin/users/:userId" 
+          element={
+            <PrivateRoute roleRequired="admin">
+              <UserPanel />
+            </PrivateRoute>
+          } 
+        />
+        <Route 
           path="/dashboard" 
           element={
             <PrivateRoute roleRequired="user">
@@ -29,6 +47,7 @@ function App() {
         />
         <Route path="/unauthorized" element={<Unauthorized />} />
       </Routes>
+ 
     </BrowserRouter>
   );
 }
