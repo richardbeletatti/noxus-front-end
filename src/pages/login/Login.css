@@ -21,6 +21,9 @@
   width: 150px;
   height: auto;
   margin-bottom: 20px;
+  filter: brightness(0) invert(1);
+  user-select: none;
+  animation: fadeIn 1s ease-in-out;
 }
 
 .login-form {

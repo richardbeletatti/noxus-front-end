@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Admin.css';
+import NoxusLogo from '../../assets/noxus-logo.png';
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -14,18 +15,38 @@ const Admin = () => {
     navigate('/admin/users');
   };
 
+  const handleCreateAccount = () => {
+    navigate('/admin/create-account');
+  };
+
+  const handleReports = () => {
+    navigate('/admin/reports');
+  };
+
   return (
     <div className="admin-container">
-      <h1 className="admin-title">ADMIN</h1>
+      <img src={NoxusLogo} alt="Noxus Logo" className="noxus-logo" />
 
-      <div className="admin-buttons">
+      <h1 className="admin-title">Central de Controle</h1>
+
+      <div className="admin-buttons-vertical">
         <button onClick={handleViewUsers} className="admin-button">
           Ver Usuários
+        </button>
+        <button onClick={handleCreateAccount} className="admin-button">
+          Criar Conta
+        </button>
+        <button onClick={handleReports} className="admin-button">
+          Relatórios
         </button>
         <button onClick={handleLogout} className="admin-button logout">
           Sair
         </button>
       </div>
+
+      <footer className="admin-footer">
+        © Agência Além Digital
+      </footer>
     </div>
   );
 };

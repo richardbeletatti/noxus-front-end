@@ -37,6 +37,7 @@
   border: none;
   color: #fff;
   padding: 0.5rem 1.1rem;
+   margin-top: 1rem; 
   border-radius: 8px;
   cursor: pointer;
   font-size: 0.95rem;
@@ -88,7 +89,7 @@
 
 .noxus-logo {
   height: 120px; 
-  filter: brightness(0) invert(1); /* deixa o logo clarinho/branco */
+  filter: brightness(0) invert(1);
   user-select: none;
   animation: fadeIn 1s ease-in-out;
 }
