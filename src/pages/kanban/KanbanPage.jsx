@@ -1,48 +1,88 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import KanbanColumn from "./KanbanColumns";
-import { parseJwt } from "../../utils/authUtils";
 import "./Kanban.css";
 
-const KanbanPage = () => {
-  const [columns, setColumns] = useState([
-    {
-      id: "leads",
-      title: "Leads",
-      cards: [
-        { id: "1", title: "Card 1", description: "Descrição do Card 1" },
-        { id: "2", title: "Card 2", description: "Descrição do Card 2" }
-      ]
-    }
-  ]);
-
+const KanbanPage = ({ userId }) => {
+  const [columns, setColumns] = useState([]);
   const token = localStorage.getItem("token");
-  const decodedToken = token ? parseJwt(token) : null;
 
-  if (!decodedToken) {
-    return <div>Token inválido ou não encontrado.</div>;
-  }
-
-  const role = decodedToken.role;
+  // Aqui você pode extrair role do token, se precisar para controle de UI
+  const decodedToken = token ? JSON.parse(atob(token.split('.')[1])) : null;
+  const role = decodedToken?.role;
   const isAdmin = role === "admin";
 
-  const handleAddColumn = () => {
-    const newColumnTitle = prompt("Digite o nome da nova coluna:");
-    if (newColumnTitle) {
-      const newColumn = {
-        id: Date.now().toString(),
-        title: newColumnTitle,
-        cards: []
-      };
-      setColumns([...columns, newColumn]);
+  // Função para buscar as colunas no back-end
+  const fetchColumns = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/admin/kanban/users/${userId}/columns`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (!response.ok) throw new Error("Erro ao buscar colunas");
+      const data = await response.json();
+      console.log('Colunas recebidas:', data);
+      setColumns(data);
+    } catch (error) {
+      console.error("Erro:", error);
     }
   };
 
-  const handleDeleteColumn = (id) => {
-    if (id === "leads") {
-      alert('A coluna "Leads" não pode ser excluída.');
-      return;
+  useEffect(() => {
+    if (userId) {
+      fetchColumns();
     }
-    setColumns(columns.filter((column) => column.id !== id));
+  }, [userId]);
+
+  // Função para criar nova coluna (só admin pode criar)
+  const handleAddColumn = async () => {
+    const newColumnTitle = prompt("Digite o nome da nova coluna:");
+    if (newColumnTitle) {
+      try {
+        const response = await fetch(
+          `http://localhost:8080/admin/kanban/users/${userId}/columns`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              name: newColumnTitle,
+              cards: [],
+            }),
+          }
+        );
+        if (!response.ok) throw new Error("Erro ao criar coluna");
+        fetchColumns();
+      } catch (error) {
+        console.error("Erro:", error);
+      }
+    }
+  };
+
+  // Função para deletar coluna (só admin pode deletar)
+  const handleDeleteColumn = async (columnId) => {
+    if (window.confirm("Tem certeza que quer excluir esta coluna?")) {
+      try {
+        const response = await fetch(
+          `http://localhost:8080/admin/kanban/users/${userId}/columns/${columnId}`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (!response.ok) throw new Error("Erro ao deletar coluna");
+        fetchColumns();
+      } catch (error) {
+        console.error("Erro:", error);
+      }
+    }
   };
 
   return (

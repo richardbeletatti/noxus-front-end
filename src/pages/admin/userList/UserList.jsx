@@ -43,7 +43,7 @@ const UserList = () => {
       <div className="header-top">
         <button className="button-back" onClick={handleBack}>← Voltar</button>
         <img src={NoxusLogo} alt="Noxus Logo" className="noxus-logo" />
-        <div style={{ width: '75px' }}>{/* espaço para balancear o botão voltar */}</div>
+        <div style={{ width: '75px' }}></div>
       </div>
 
       <h2>Painel das Empresas</h2>
@@ -52,8 +52,7 @@ const UserList = () => {
         {users.map(user => (
           <li key={user.id} className="user-card">
             <div className="user-info">
-              <img
-                src={`https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=8e44ad&color=fff&rounded=true&size=40`}
+              <img src={`https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=4f74f9&color=fff&rounded=true&size=40`}
                 alt={user.name}
                 className="user-avatar"
               />

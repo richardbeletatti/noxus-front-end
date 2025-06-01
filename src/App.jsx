@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './pages/login/Login';
 import AdminPage from './pages/admin/Admin';
-import Dashboard from './pages/dashboard/Dashboard';
+import UserKanbanPage from './pages/userKanbanPage/UserKanbanPage';
 import Unauthorized from './pages/unauthorized/Unauthorized';
 import PrivateRoute from './components/PrivateRoute';
 import UserList from './pages/admin/userList/UserList';
@@ -41,7 +41,7 @@ function App() {
           path="/dashboard" 
           element={
             <PrivateRoute roleRequired="user">
-              <Dashboard />
+              <UserKanbanPage />
             </PrivateRoute>
           } 
         />

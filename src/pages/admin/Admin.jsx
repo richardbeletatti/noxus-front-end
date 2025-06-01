@@ -31,7 +31,7 @@ const Admin = () => {
 
       <div className="admin-buttons-vertical">
         <button onClick={handleViewUsers} className="admin-button">
-          Ver Usuários
+          Painel das Empresas
         </button>
         <button onClick={handleCreateAccount} className="admin-button">
           Criar Conta

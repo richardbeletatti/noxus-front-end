@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./KanbanColumn.css";
+import "./Kanban.css";
 
 const KanbanColumn = ({ column, isAdmin, onDeleteColumn }) => {
   const [popupOpen, setPopupOpen] = useState(false);
@@ -18,7 +18,7 @@ const KanbanColumn = ({ column, isAdmin, onDeleteColumn }) => {
   return (
     <div className="kanban-column">
       <div className="kanban-column-header">
-        <h3>{column.title}</h3>
+        <h3>{column.name}</h3>
         {isAdmin && column.id !== "leads" && (
           <button onClick={() => onDeleteColumn(column.id)}>X</button>
         )}

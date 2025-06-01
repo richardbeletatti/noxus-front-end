@@ -2,82 +2,86 @@
   max-width: 800px;
   margin: 2rem auto;
   padding: 1.5rem;
-  background-color: #2e2a3d;
+  background-color: #1a2638; /* fundo azul escuro */
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #f0e9ff;
+  color: #e0e7ff; /* texto azul claro */
 }
 
 .user-list-container h2 {
   margin-bottom: 1.5rem;
   text-align: center;
-  color: #f0e9ff;
+  color: #e0e7ff;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
 .user-card {
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(224, 231, 255, 0.1);
+  border: 1px solid rgba(224, 231, 255, 0.3);
   padding: 1rem 1.5rem;
-  border-radius: 6px;
+  border-radius: 8px;
   margin-bottom: 1rem;
   display: flex;
   justify-content: space-between;
-  align-items: center; /* já está certo, mas mantenha */
-  color: #f0e9ff;
-  transition: box-shadow 0.3s ease;
+  align-items: center;
+  color: #e0e7ff;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
 }
 
 .user-card:hover {
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 6px 18px rgba(100, 149, 237, 0.6); /* azul suave */
+  transform: translateY(-3px);
 }
 
 .button-edit {
-  background-color: #c64ac9 !important;
-  border: none;
-  color: #fff;
+  background-color: #4f74f9 !important; /* azul */
+  border: none !important;
+  color: #fff !important;
   padding: 0.5rem 1.1rem;
-   margin-top: 1rem; 
-  border-radius: 8px;
+  border-radius: 8px !important;
   cursor: pointer;
   font-size: 0.95rem;
-  box-shadow: 0 4px 12px rgba(198, 74, 201, 0.4);
+  box-shadow: 0 4px 12px rgba(79, 116, 249, 0.4);
   transition: all 0.3s ease;
 }
-
 .button-edit:hover {
-  background-color: #d86ae3;
-  box-shadow: 0 6px 16px rgba(198, 74, 201, 0.6);
+  background-color: #637bf9 !important;
+  box-shadow: 0 6px 16px rgba(79, 116, 249, 0.6);
   transform: translateY(-2px) scale(1.03);
 }
+
 
 .user-info {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 1rem;
+  font-weight: 600;
 }
 
 .user-avatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 2px solid #fff;
+  border: 2px solid #4f74f9;
+  background-color: #3b4a6b;
 }
 
 .button-back {
   background-color: transparent;
-  border: 2px solid #f0e9ff;
-  color: #f0e9ff;
-  padding: 0.4rem 0.8rem;
-  margin-bottom: 1.5rem;
-  border-radius: 4px;
+  border: none;
+  color: #a8bbff;
+  font-size: 1.1rem;
   cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
+  font-weight: 600;
+  padding: 0.4rem 0.8rem;
+  transition: color 0.3s ease;
 }
 
 .button-back:hover {
-  background-color: rgba(255, 255, 255, 0.15);
+  color: #d1d9ff;
 }
 
 .header-top {
@@ -88,26 +92,10 @@
 }
 
 .noxus-logo {
-  height: 120px; 
+  height: 100px; 
   filter: brightness(0) invert(1);
   user-select: none;
   animation: fadeIn 1s ease-in-out;
-}
-
-
-.button-back {
-  background-color: transparent;
-  border: none;
-  color: #f0e9ff;
-  font-size: 1rem;
-  cursor: pointer;
-  font-weight: 600;
-  padding: 0.4rem 0.8rem;
-  transition: color 0.3s ease;
-}
-
-.button-back:hover {
-  color: #d88deb;
 }
 
 @keyframes fadeIn {
