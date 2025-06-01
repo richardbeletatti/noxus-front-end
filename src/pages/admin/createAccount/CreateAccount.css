@@ -1,0 +1,100 @@
+.create-account-container {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #1a2638; /* fundo azul escuro */
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  color: #e0e7ff; /* texto azul claro */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.create-account-title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #e0e7ff;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.create-account-field {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.create-account-field label {
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  color: #e0e7ff;
+}
+
+.create-account-field input {
+  padding: 0.5rem;
+  border: 1px solid rgba(224, 231, 255, 0.3);
+  border-radius: 6px;
+  background-color: rgba(224, 231, 255, 0.05);
+  color: #e0e7ff;
+  font-size: 1rem;
+  outline: none;
+}
+
+.create-account-field input:focus {
+  border-color: #4f74f9;
+  box-shadow: 0 0 5px rgba(79, 116, 249, 0.5);
+}
+
+.create-account-button {
+  background-color: #4f74f9;
+  border: none;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  box-shadow: 0 4px 12px rgba(79, 116, 249, 0.4);
+  transition: all 0.3s ease;
+}
+
+.create-account-button:hover {
+  background-color: #637bf9;
+  box-shadow: 0 6px 16px rgba(79, 116, 249, 0.6);
+  transform: translateY(-2px) scale(1.03);
+}
+
+.create-account-error {
+  color: #ff6b6b;
+  background-color: rgba(255, 107, 107, 0.1);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.create-account-success {
+  color: #7dffb3;
+  background-color: rgba(125, 255, 179, 0.1);
+  border: 1px solid rgba(125, 255, 179, 0.3);
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.create-account-back-button {
+  background-color: transparent;
+  border: none;
+  color: #a8bbff;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  transition: color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.create-account-back-button:hover {
+  color: #d1d9ff;
+}

@@ -6,6 +6,7 @@ import Unauthorized from './pages/unauthorized/Unauthorized';
 import PrivateRoute from './components/PrivateRoute';
 import UserList from './pages/admin/userList/UserList';
 import UserPanel from './pages/admin/userPanel/UserPanel';
+import CreateAccount from './pages/admin/createAccount/CreateAccount';
 
 function App() {
   return (
@@ -37,6 +38,15 @@ function App() {
             </PrivateRoute>
           } 
         />
+        <Route 
+          path="/admin/create-account" 
+          element={
+            <PrivateRoute roleRequired="admin">
+              <CreateAccount />
+            </PrivateRoute>
+          } 
+        />
+
         <Route 
           path="/dashboard" 
           element={
