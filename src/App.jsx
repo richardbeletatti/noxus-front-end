@@ -7,6 +7,7 @@ import PrivateRoute from './components/PrivateRoute';
 import UserList from './pages/admin/userList/UserList';
 import UserPanel from './pages/admin/userPanel/UserPanel';
 import CreateAccount from './pages/admin/createAccount/CreateAccount';
+import AccountManager from './pages/admin/accountManager/AccountManager';
 
 function App() {
   return (
@@ -46,7 +47,14 @@ function App() {
             </PrivateRoute>
           } 
         />
-
+        <Route 
+          path="/admin/account-manager" 
+          element={
+            <PrivateRoute roleRequired="admin">
+              <AccountManager />
+            </PrivateRoute>
+          } 
+        />
         <Route 
           path="/dashboard" 
           element={

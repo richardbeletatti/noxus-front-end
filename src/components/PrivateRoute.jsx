@@ -14,7 +14,7 @@ const PrivateRoute = ({ children, roleRequired }) => {
     return <Navigate to="/login" replace />;
   }
 
-  if (roleRequired && role !== roleRequired) {
+  if (roleRequired && role?.toLowerCase() !== roleRequired.toLowerCase()) {
     console.log('Redirecionando para unauthorized');
     return <Navigate to="/unauthorized" replace />;
   }

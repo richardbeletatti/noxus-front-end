@@ -19,8 +19,8 @@ const Admin = () => {
     navigate('/admin/create-account');
   };
 
-  const handleReports = () => {
-    navigate('/admin/reports');
+  const accountManager = () => {
+    navigate('/admin/account-manager');
   };
 
   return (
@@ -34,10 +34,10 @@ const Admin = () => {
           Painel das Empresas
         </button>
         <button onClick={handleCreateAccount} className="admin-button">
-          Criar Conta
+          Criar conta
         </button>
-        <button onClick={handleReports} className="admin-button">
-          Relatórios
+        <button onClick={accountManager} className="admin-button">
+          Gerenciar contas
         </button>
         <button onClick={handleLogout} className="admin-button logout">
           Sair

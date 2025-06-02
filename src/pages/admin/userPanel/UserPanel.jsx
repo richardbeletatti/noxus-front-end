@@ -40,7 +40,6 @@ const UserPanel = () => {
 
   return (
     <div className="user-panel-container">
-      {/* Cabeçalho sofisticado */}
       <div className="user-panel-header">
         <button onClick={() => navigate(-1)} className="user-panel-back" title="Voltar">
           ←
@@ -56,7 +55,6 @@ const UserPanel = () => {
         </button>
       </div>
 
-      {/* Kanban */}
       <div className="kanban-container">
         <KanbanPage userId={userId} />
       </div>
