@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Kanban.css";
 
-const KanbanColumn = ({ column, isAdmin, onDeleteColumn }) => {
+const KanbanColumn = ({ column, isAdmin, onDeleteColumn, onAddCard }) => {
   const [popupOpen, setPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
 
@@ -19,7 +19,7 @@ const KanbanColumn = ({ column, isAdmin, onDeleteColumn }) => {
     <div className="kanban-column">
       <div className="kanban-column-header">
         <h3>{column.name}</h3>
-        {isAdmin && column.id !== "leads" && (
+        {isAdmin && (
           <button onClick={() => onDeleteColumn(column.id)}>X</button>
         )}
       </div>
@@ -37,13 +37,26 @@ const KanbanColumn = ({ column, isAdmin, onDeleteColumn }) => {
         ))}
       </div>
 
+      {isAdmin && (
+        <button
+          className="add-card-button"
+          onClick={() => onAddCard(column.id)}
+        >
+          + Criar Card
+        </button>
+      )}
+
       {popupOpen && (
         <div className="popup-overlay" onClick={closePopup}>
-          <div className="popup-content" onClick={e => e.stopPropagation()}>
-            <button className="popup-close" onClick={closePopup}>×</button>
+          <div
+            className="popup-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button className="popup-close" onClick={closePopup}>
+              ×
+            </button>
             <h2>{selectedCard.title}</h2>
             <p>{selectedCard.description}</p>
-            {/* Aqui pode adicionar mais detalhes e histórico */}
           </div>
         </div>
       )}
