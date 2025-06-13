@@ -2,57 +2,59 @@ import React, { useState } from "react";
 import "./AddCardModal.css";
 
 const AddCardModal = ({ isOpen, onClose, onSave }) => {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [history, setHistory] = useState("");
+  const [title, setTitle] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [description, setDescription] = useState("");
 
   if (!isOpen) return null;
 
   const handleSubmit = () => {
     onSave({
-      name,
-      phone,
-      history,
+      title,
+      phoneNumber,
       description,
-      title: name,
+      conversationHistory: "https://wa.me/5599999999999", // link fixo
     });
-    setName("");
-    setPhone("");
-    setHistory("");
+
+    // Limpa os campos após salvar
+    setTitle("");
+    setPhoneNumber("");
     setDescription("");
+
+     onClose();
   };
 
   return (
     <div className="modal-backdrop">
       <div className="modal">
         <h2>Criar novo card</h2>
+
         <input
           placeholder="Nome"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
         />
+
         <input
           placeholder="Telefone"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
+          value={phoneNumber}
+          onChange={(e) => setPhoneNumber(e.target.value)}
         />
-        <textarea
-          placeholder="E-mail de Contato"
-          value={history}
-          onChange={(e) => setHistory(e.target.value)}
-        />
+
         <textarea
           placeholder="Descrição"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-      
-        <div className="modal-buttons">
-            <button className="save-btn">Salvar</button>
-            <button className="cancel-btn" onClick={onClose}>Cancelar</button>
-        </div>
 
+        <div className="modal-buttons">
+          <button className="save-btn" onClick={handleSubmit}>
+            Salvar
+          </button>
+          <button className="cancel-btn" onClick={onClose}>
+            Cancelar
+          </button>
+        </div>
       </div>
     </div>
   );

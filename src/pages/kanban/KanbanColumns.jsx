@@ -37,14 +37,8 @@ const KanbanColumn = ({ column, isAdmin, onDeleteColumn, onAddCard }) => {
         ))}
       </div>
 
-      {isAdmin && (
-        <button
-          className="add-card-button"
-          onClick={() => onAddCard(column.id)}
-        >
-          + Criar Card
-        </button>
-      )}
+      {onAddCard && (<button className="add-card-button" onClick={
+        () => onAddCard(column.id)}>+ Criar Card</button>)}
 
       {popupOpen && (
         <div className="popup-overlay" onClick={closePopup}>

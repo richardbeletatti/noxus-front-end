@@ -1,19 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import KanbanColumn from "../kanban/KanbanColumns";
+import AddCardModal from "../card/AddCardModal";
 import "../kanban/Kanban.css";
 
 const UserKanbanPage = () => {
   const [columns, setColumns] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [currentColumnId, setCurrentColumnId] = useState(null);
+  const [userName, setUserName] = useState("");
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
   const decodedToken = token ? JSON.parse(atob(token.split(".")[1])) : null;
-  const userName = decodedToken?.name || "Usuário";
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+
+    setUserName(decodedToken?.name || "Usuário");
+
+    fetchColumns();
+  }, []);
 
   const fetchColumns = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/kanban/columns`, {
+      const response = await fetch("http://localhost:8080/kanban/columns", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -22,22 +36,48 @@ const UserKanbanPage = () => {
       const data = await response.json();
       setColumns(data);
     } catch (error) {
-      console.error("Erro:", error);
+      console.error("Erro ao buscar colunas:", error);
     }
   };
 
-  useEffect(() => {
-    fetchColumns();
-  }, []);
-
   const handleLogout = () => {
-    localStorage.clear();
+    localStorage.removeItem("token");
     navigate("/login");
+  };
+
+  const openAddCardModal = (columnId) => {
+    setCurrentColumnId(columnId);
+    setModalOpen(true);
+  };
+
+  const closeAddCardModal = () => {
+    setModalOpen(false);
+    setCurrentColumnId(null);
+  };
+
+  const handleSaveCard = async (cardData) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/kanban/columns/${currentColumnId}/cards`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(cardData),
+        }
+      );
+      if (!response.ok) throw new Error("Erro ao criar card");
+      await fetchColumns();
+      closeAddCardModal();
+    } catch (error) {
+      console.error("Erro ao adicionar card:", error);
+    }
   };
 
   return (
     <div>
-      {/* Cabeçalho */}
       <header
         style={{
           display: "flex",
@@ -49,10 +89,14 @@ const UserKanbanPage = () => {
           fontFamily: "Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
         }}
       >
-        {/* Espaço vazio para centralizar o nome */}
         <div style={{ width: 60 }}></div>
 
-        <h2 style={{ margin: 0, fontWeight: "normal" }}>{userName}</h2>
+        <div style={{ textAlign: "center" }}>
+          <h2 style={{ margin: 0, fontWeight: "normal" }}>{userName}</h2>
+          <p style={{ margin: 0, fontSize: "0.9em", color: "#ccc" }}>
+            {decodedToken?.sub}
+          </p>
+        </div>
 
         <button
           onClick={handleLogout}
@@ -70,7 +114,6 @@ const UserKanbanPage = () => {
         </button>
       </header>
 
-      {/* Kanban */}
       <div className="kanban-container" style={{ marginTop: 16 }}>
         {columns.length === 0 ? (
           <p style={{ color: "#fff", padding: 20 }}>Carregando colunas...</p>
@@ -81,10 +124,17 @@ const UserKanbanPage = () => {
               column={column}
               isAdmin={false}
               onDeleteColumn={null}
+              onAddCard={openAddCardModal}
             />
           ))
         )}
       </div>
+
+      <AddCardModal
+        isOpen={modalOpen}
+        onClose={closeAddCardModal}
+        onSave={handleSaveCard}
+      />
     </div>
   );
 };
