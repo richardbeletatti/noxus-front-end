@@ -1,20 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Kanban.css";
 
-const KanbanColumn = ({ column, isAdmin, onDeleteColumn, onAddCard }) => {
-  const [popupOpen, setPopupOpen] = useState(false);
-  const [selectedCard, setSelectedCard] = useState(null);
-
-  const openPopup = (card) => {
-    setSelectedCard(card);
-    setPopupOpen(true);
-  };
-
-  const closePopup = () => {
-    setSelectedCard(null);
-    setPopupOpen(false);
-  };
-
+const KanbanColumn = ({ column, isAdmin, onDeleteColumn, onAddCard, onCardClick }) => {
   return (
     <div className="kanban-column">
       <div className="kanban-column-header">
@@ -29,7 +16,7 @@ const KanbanColumn = ({ column, isAdmin, onDeleteColumn, onAddCard }) => {
           <div
             key={card.id}
             className="kanban-card"
-            onClick={() => openPopup(card)}
+            onClick={() => onCardClick(card)}
           >
             <h4>{card.title}</h4>
             <p>{card.description}</p>
@@ -37,22 +24,10 @@ const KanbanColumn = ({ column, isAdmin, onDeleteColumn, onAddCard }) => {
         ))}
       </div>
 
-      {onAddCard && (<button className="add-card-button" onClick={
-        () => onAddCard(column.id)}>+ Criar Card</button>)}
-
-      {popupOpen && (
-        <div className="popup-overlay" onClick={closePopup}>
-          <div
-            className="popup-content"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button className="popup-close" onClick={closePopup}>
-              ×
-            </button>
-            <h2>{selectedCard.title}</h2>
-            <p>{selectedCard.description}</p>
-          </div>
-        </div>
+      {onAddCard && (
+        <button className="add-card-button" onClick={() => onAddCard(column.id)}>
+          + Criar Card
+        </button>
       )}
     </div>
   );

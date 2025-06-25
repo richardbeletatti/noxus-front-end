@@ -9,6 +9,7 @@ const UserKanbanPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [currentColumnId, setCurrentColumnId] = useState(null);
   const [userName, setUserName] = useState("");
+  const [selectedCard, setSelectedCard] = useState(null);
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
@@ -21,7 +22,6 @@ const UserKanbanPage = () => {
     }
 
     setUserName(decodedToken?.name || "Usuário");
-
     fetchColumns();
   }, []);
 
@@ -47,12 +47,19 @@ const UserKanbanPage = () => {
 
   const openAddCardModal = (columnId) => {
     setCurrentColumnId(columnId);
+    setSelectedCard(null); // indica que é criação
     setModalOpen(true);
   };
 
-  const closeAddCardModal = () => {
+  const handleCardClick = (card) => {
+    setSelectedCard(card); // indica que é visualização
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
     setModalOpen(false);
     setCurrentColumnId(null);
+    setSelectedCard(null);
   };
 
   const handleSaveCard = async (cardData) => {
@@ -70,11 +77,35 @@ const UserKanbanPage = () => {
       );
       if (!response.ok) throw new Error("Erro ao criar card");
       await fetchColumns();
-      closeAddCardModal();
+      closeModal();
     } catch (error) {
       console.error("Erro ao adicionar card:", error);
     }
   };
+
+const handleDeleteCard = async () => {
+  if (!selectedCard) return;
+
+  try {
+    const response = await fetch(
+      `http://localhost:8080/kanban/cards/${selectedCard.id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (!response.ok) throw new Error("Erro ao deletar card");
+
+    await fetchColumns(); // atualiza a tela com o card removido
+    setSelectedCard(null);
+    setModalOpen(false);
+  } catch (error) {
+    console.error("Erro ao deletar card:", error);
+  }
+};
 
   return (
     <div>
@@ -125,6 +156,7 @@ const UserKanbanPage = () => {
               isAdmin={false}
               onDeleteColumn={null}
               onAddCard={openAddCardModal}
+              onCardClick={handleCardClick}
             />
           ))
         )}
@@ -132,8 +164,10 @@ const UserKanbanPage = () => {
 
       <AddCardModal
         isOpen={modalOpen}
-        onClose={closeAddCardModal}
+        onClose={closeModal}
         onSave={handleSaveCard}
+        onDelete={handleDeleteCard}
+        card={selectedCard}
       />
     </div>
   );
