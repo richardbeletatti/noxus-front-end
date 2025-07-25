@@ -8,6 +8,7 @@ import UserList from './pages/admin/userList/UserList';
 import UserPanel from './pages/admin/userPanel/UserPanel';
 import CreateAccount from './pages/admin/createAccount/CreateAccount';
 import AccountManager from './pages/admin/accountManager/AccountManager';
+import CustomizeBot from "./pages/customizeBot/CustomizeBot";
 
 function App() {
   return (
@@ -63,6 +64,15 @@ function App() {
             </PrivateRoute>
           } 
         />
+
+      <Route path="/customize-bot" 
+        element={
+          <PrivateRoute roleRequired="user">
+            <CustomizeBot />
+          </PrivateRoute>
+        }
+      />
+
         <Route path="/unauthorized" element={<Unauthorized />} />
       </Routes>
  

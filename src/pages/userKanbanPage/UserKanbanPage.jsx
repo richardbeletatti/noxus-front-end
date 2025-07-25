@@ -40,6 +40,10 @@ const UserKanbanPage = () => {
     }
   };
 
+  const handleCustomBot = () => {
+    navigate("/customize-bot");
+  };
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/login");
@@ -120,7 +124,22 @@ const handleDeleteCard = async () => {
           fontFamily: "Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
         }}
       >
-        <div style={{ width: 60 }}></div>
+        <button
+          onClick={handleCustomBot}
+          style={{
+            backgroundColor: "#2e89ff", // azul
+            border: "none",
+            borderRadius: "6px",
+            color: "#fff",
+            padding: "6px 12px",
+            cursor: "pointer",
+            width: "auto", // opcional: ajusta à largura do texto
+            minWidth: 100, // dá um tamanho mínimo
+            fontWeight: "bold"
+            }}
+          >
+            Customizar BOT
+          </button>
 
         <div style={{ textAlign: "center" }}>
           <h2 style={{ margin: 0, fontWeight: "normal" }}>{userName}</h2>
