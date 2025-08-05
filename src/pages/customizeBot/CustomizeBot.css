@@ -1,0 +1,78 @@
+/* Página principal */
+.customize-bot-page {
+  background-color: #1e1e2f;
+  min-height: 100vh;
+  padding: 20px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+}
+
+/* Card container */
+.customize-bot-card {
+  background-color: #2b2d42;
+  border-radius: 12px;
+  padding: 40px;
+  max-width: 800px;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Intenção box */
+.intent-box {
+  background-color: #3a3d5a;
+  padding: 20px 40px 20px 20px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+/* Labels */
+.input-label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Inputs e Textareas */
+.input-field {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  background-color: #f9f9f9;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+/* Botões */
+.btn {
+  background-color: #444;
+  color: #fff;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-small {
+  background-color: #666;
+  font-size: 0.9em;
+  margin-top: 8px;
+}
+
+.btn-submit {
+  background-color: #2e89ff;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 12px;
+}
+
+.btn-danger {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  gap: 10px 16px;
+}
